@@ -6,18 +6,17 @@ export default {
    * @return {Array}
    */
   generateGradualColors: count => {
-    assert(typeof count === 'number' && count > 0, '`count` must be a positive integer.');
+    assert(_.isInteger(count) && count > 0, '`count` must be a positive integer.');
 
     let colors = [];
     let max = 256;// FF+1
     let pace = max / count;
     let counter = 0;
 
-    for (let i = 0; i < count; i++) {
-      let color = counter.toString(16) + '0000';
+    for (; counter / pace < count; counter += pace) {
+      let color = counter.toString(16).toUpperCase() + '0000';
       if (color.length < 6) color = '0' + color;
       colors.push('#' + color);
-      counter += pace;
     }
 
     return colors;
@@ -30,7 +29,7 @@ export default {
    * @return {Array} a square matrix with rowCount*rowCount color codes.
    */
   generateGradualColorMatrix: rowCount => {
-    assert(typeof rowCount === 'number' && rowCount > 0, '`rowCount` must be a positive integer.');
+    assert(_.isInteger(rowCount) && rowCount > 0, '`rowCount` must be a positive integer.');
 
     let colors = [];
     let max = 256;// FF+1
@@ -41,9 +40,9 @@ export default {
       let colCounter = 0;
       let row = [];
       for (let j = 0; j < rowCount; j++) {
-        let red = rowCounter.toString(16);
+        let red = rowCounter.toString(16).toUpperCase();
         if (red.length < 2) red = '0' + red;
-        let green = colCounter.toString(16);
+        let green = colCounter.toString(16).toUpperCase();
         if (green.length < 2) green = '0' + green;
         row.push('#' + red + green + '00');
         colCounter += pace;
@@ -60,11 +59,12 @@ export default {
    * @return {string} the string value of the reverse color. e.g., "00FFFF".
    */
   getReverseColor: color => {
-    assert(typeof color === 'string' && color.trim() !== '', '`color` must be a positive integer with hex format.');
-    let code = color.replace(/#/g, ''), value = _.parseInt(code, 16);
-    assert(!isNaN(value) && value >= 0 && value <= 0xFFFFFF, '`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
+    assert(typeof color === 'string' && /^#?([0-9a-f]{1,6}|[0-9A-F]{1,6})$/g.test(color),
+      '`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
 
-    let result = '000000' + (0xFFFFFF - value).toString(16);
+    let value = _.parseInt(color.replace(/#/g, ''), 16);
+    let result = '000000' + (0xFFFFFF - value).toString(16).toUpperCase();
+
     return '#' + result.substring(result.length - 6, result.length);
   },
 
@@ -126,8 +126,11 @@ export default {
    * @return {number[][] | *[][]} a two-dimension square matrix.
    */
   arrayToMatrix: (array, count, rowCount) => {
+    assert(_.isArray(array) && array.length > 0,
+      '`array` must be a one-dimension array.\n' +
+      'Your `array` is: ' + array);
     let rCount = Math.sqrt(array.length);
-    assert(_.isArray(array) && array.length > 0 && _.isInteger(rCount),
+    assert(_.isInteger(rCount),
       '`array` must be a one-dimension array of n^2 members.\n' +
       'Your `array` is: ' + array + '\n' +
       'There are ' + array.length + ' members in total.');
@@ -136,7 +139,7 @@ export default {
       assert(_.isInteger(count) && count > 0 &&
              _.isInteger(rowCount) && rowCount > 0 &&
              count === rowCount ** 2,
-        '`count` and `rowCount` must be integers, and `count` must be a square of `rowCount`');
+        '`count` and `rowCount` must be integers, and `count` must be a square of `rowCount`.');
       assert(array.length === count,
         '`array` must be a one-dimension array of ' + count + ' members.\nYour `array` is: ' + array);
     }
