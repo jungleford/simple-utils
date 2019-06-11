@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "webpack --config ./webpack.babel.js",
-    "test": "./node_modules/.bin/mocha-webpack --webpack-config webpack.config.js --require babel-register test/js/**/*.spec.js",
+    "test": "./node_modules/.bin/mocha-webpack --webpack-config webpack.babel.js test/js/**/*.spec.js",
     "karma": "./node_modules/.bin/karma start --single-run"
   },
   "dependencies": {
