@@ -1,6 +1,6 @@
-import {expect, should} from 'chai';
+import {expect} from 'chai';
 
-import Utils from 'src/js';
+import Utils from '../../src/js';
 
 describe('[@jungleford/simple-utils] test suite:', () => {
 

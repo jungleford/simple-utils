@@ -27,29 +27,15 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/js/**/*.spec.js': ['webpack']
+      'test/js/**/*.spec.js': ['webpack', 'babel', 'coverage']
     },
 
 
     webpack: {
       mode: 'development',
-      //entry: ['babel-polyfill', __dirname + '/src/js/index.js'],
       resolve: {
         modules: [__dirname, 'node_modules'], // must tell test suite where src is
         extensions: ['.js']
-      },
-      module: {
-        rules: [{
-          exclude: [/node_modules/, __dirname + "/src/js/lib"],
-          loader: 'babel',
-          query: {
-            compact: false,
-            presets: ['es2015']
-          }
-        }]
-      },
-      resolveLoader: {
-        moduleExtensions: ['-loader']
       },
       plugins: [
         new webpack.ProvidePlugin({
@@ -63,8 +49,11 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      type : 'html',
+      dir : 'dist/coverage/'
+    },
 
     // web server port
     port: 9876,
@@ -85,7 +74,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    //browsers: ['Chrome', 'ChromeCanary', 'PhantomJS'],
+    //browsers: ['Chrome', 'ChromeCanary', 'Firefox', 'PhantomJS'],
 
 
     // Continuous Integration mode
