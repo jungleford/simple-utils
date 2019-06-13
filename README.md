@@ -1,4 +1,4 @@
-# simple-utils [![npm package][npm-badge]][npm]
+# simple-utils ![npm (scoped)](https://img.shields.io/npm/v/@jungleford/simple-utils.svg)
 
 A set of simple utilities for internal usage.
 
