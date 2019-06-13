@@ -1,10 +1,12 @@
-# simple-utils
+# simple-utils [![npm package][npm-badge]][npm]
 
 A set of simple utilities for internal usage.
 
 ## Install
 
-    $ npm install
+```bash
+$ npm install
+```
 
 ## Testing
 
@@ -12,8 +14,12 @@ You need a mocha or karma command line utility, for this package, mocha@5.2.0, m
 
 Inline script is available:
 
-    $ npm test
+```bash
+$ npm test
+```
 
 or
 
-    $ npm run karma
+```bash
+$ npm run karma
+```

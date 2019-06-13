@@ -1,6 +1,6 @@
 {
   "name": "@jungleford/simple-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A set of simple utilities for internal usage.",
   "author": "Samuel Lee",
   "homepage": "https://github.com/jungleford/simple-utils",
@@ -13,8 +13,9 @@
     "utils"
   ],
   "scripts": {
-    "build": "webpack --config ./webpack.babel.js",
-    "test": "./node_modules/.bin/mocha-webpack --webpack-config webpack.babel.js test/js/**/*.spec.js",
+    "compile": "babel --presets es2015,stage-0 -d lib/ src/",
+    "build": "npm run compile && webpack --config ./webpack.babel.prod.js",
+    "test": "./node_modules/.bin/mocha-webpack --webpack-config webpack.babel.dev.js test/js/**/*.spec.js",
     "karma": "./node_modules/.bin/karma start --single-run"
   },
   "dependencies": {
@@ -22,13 +23,14 @@
     "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
-    "babel-runtime": "^6.18.0",
+    "babel-runtime": "^6.26.0",
     "chai": "^4.2.0",
     "karma": "^3.1.4",
     "karma-babel-preprocessor": "^7.0.0",
