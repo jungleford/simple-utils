@@ -1,3 +1,7 @@
+import libs from './include';
+const assert = libs.assert;
+const _ = libs._;
+
 export default {
   /**
    * Generate an array of colors from dark to light.
@@ -59,7 +63,7 @@ export default {
    * @return {string} the string value of the reverse color. e.g., "00FFFF".
    */
   getReverseColor: color => {
-    assert(typeof color === 'string' && /^#?([0-9a-f]{1,6}|[0-9A-F]{1,6})$/g.test(color),
+    assert(_.isString(color) && /^#?([0-9a-f]{1,6}|[0-9A-F]{1,6})$/g.test(color),
       '`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
 
     let value = _.parseInt(color.replace(/#/g, ''), 16);
@@ -112,7 +116,8 @@ export default {
    */
   matrixToArray: matrix => {
     assert(_.isArray(matrix) && _.reduce(matrix, (accumulator, row) => accumulator && _.isArray(row)),
-      '`matrix` must be a two-dimension array.');
+      '`matrix` must be a two-dimension array.\n' +
+      'Your `matrix` is: ' + matrix);
 
     return _.reduce(matrix, (accumulator, row) => accumulator.concat(row));
   },

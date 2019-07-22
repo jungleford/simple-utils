@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import Utils from '../../src/js';
+import {Utils} from '../../src/js';
 
 describe('[@jungleford/simple-utils] test suite:', () => {
 
@@ -129,6 +129,28 @@ describe('[@jungleford/simple-utils] test suite:', () => {
         [13, 14, 15, 16]
       ]
     ); // deep equal
+  });
+
+  it('matrixToArray()', () => {
+    // Invalid arguments
+    expect(Utils.matrixToArray.bind(Utils, 0)).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: 0');
+    expect(Utils.matrixToArray.bind(Utils, -1)).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: -1');
+    expect(Utils.matrixToArray.bind(Utils, 3.5)).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: 3.5');
+    expect(Utils.matrixToArray.bind(Utils, '1')).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: 1');
+    expect(Utils.matrixToArray.bind(Utils, {number: 1})).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: [object Object]');
+    expect(Utils.matrixToArray.bind(Utils, null)).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: null');
+    expect(Utils.matrixToArray.bind(Utils, undefined)).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: undefined');
+    expect(Utils.matrixToArray.bind(Utils, [1, 2, 3])).to.throw('`matrix` must be a two-dimension array.\nYour `matrix` is: 1,2,3');
+
+    // Expected results
+    expect(Utils.matrixToArray(
+      [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 16]
+      ]
+    )).to.eql(Utils.generateNaturalSequence(16)); // deep equal
   });
 
   it('arrayToMatrix()', () => {

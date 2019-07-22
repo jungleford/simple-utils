@@ -1,3 +1,4 @@
 import Utils from './utils';
+import Libs from './include';
 
-export default Utils;
+export {Utils, Libs};
