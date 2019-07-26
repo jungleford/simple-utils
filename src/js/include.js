@@ -27,6 +27,7 @@ export default {
       } else if (Object.values) {
         Object.values(obj).forEach(fn);
       }
+      return obj;
     }, // no return value
     map: (array, fn) => array.map(fn),
     concat: (array1, array2) => array1.concat(array2),
@@ -35,7 +36,7 @@ export default {
     take: (array, n) => {
       if (Number.isInteger(n) && n > 0) {
         if (Array.isArray(array)) {
-          return array.filter((item, index) => index >= n - 1);
+          return array.filter((item, index) => index <= n - 1);
         } else if (typeof array === 'string') {
           return array.substring(0, n).split('');
         } else {
