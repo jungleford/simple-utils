@@ -28,8 +28,26 @@ export default {
         Object.values(obj).forEach(fn);
       }
       return obj;
-    }, // no return value
-    map: (array, fn) => array.map(fn),
+    },
+    map: (obj, opt) => {
+      if (Array.isArray(obj)) {
+        if (typeof opt === 'function') {
+          return obj.map(opt);
+        } else if (typeof opt === 'string') {
+          return obj.map(item => item[opt]);
+        }
+      } else if (Object.entries) {
+        let entries = Object.entries(obj); // a two-dimension array: [[key1, value1], [key2, value2], ...]
+        if (typeof opt === 'function') {
+          return entries.map(item => opt(item[1]));
+        } else if (typeof opt === 'string') {
+          return entries.filter(item => item[0] === opt).map(selected => selected[1]);
+        }
+      }
+
+      return obj; // nothing changed
+    },
+    find: (array, fn) => array.find(fn),
     concat: (array1, array2) => array1.concat(array2),
     reverse: array => array.reverse(),
     reduce: (array, fn, accumulator) => array.reduce(fn),
