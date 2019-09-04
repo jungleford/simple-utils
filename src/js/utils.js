@@ -13,7 +13,7 @@ export default {
     assert(_.isInteger(count) && count > 0, '`count` must be a positive integer.');
 
     let colors = [];
-    let max = 256;// FF+1
+    let max = 256; // FF+1
     let pace = max / count;
     let counter = 0;
 
@@ -36,7 +36,7 @@ export default {
     assert(_.isInteger(rowCount) && rowCount > 0, '`rowCount` must be a positive integer.');
 
     let colors = [];
-    let max = 256;// FF+1
+    let max = 256; // FF+1
     let pace = max / rowCount;
     let rowCounter = 0;
 
@@ -119,7 +119,7 @@ export default {
       '`matrix` must be a two-dimension array.\n' +
       'Your `matrix` is: ' + matrix);
 
-    return _.reduce(matrix, (accumulator, row) => accumulator.concat(row));
+    return _.reduce(matrix, (accumulator, row) => [...accumulator, ...row]);
   },
 
   /**
