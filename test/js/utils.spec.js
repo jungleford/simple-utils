@@ -56,31 +56,33 @@ describe('[@jungleford/simple-utils] test suite:', () => {
 
   it('getReverseColor()', () => {
     // Invalid arguments
-    expect(Utils.getReverseColor.bind(Utils, 0)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, -1)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, 3.5)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, 1)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, 'X')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, '1111111')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, '@11111')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, '#1111111')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, 'abcdefg')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, '#abcdefg')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, 'ABCDEFG')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, '#ABCDEFG')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, 'aBcDeF')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, '#aBcDeF')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, [1, 2])).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, {number: 1})).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, null)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
-    expect(Utils.getReverseColor.bind(Utils, undefined)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
+    expect(Utils.getReverseColor.bind(Utils, 0)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, -1)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, 3.5)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, 1)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, 'X')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, '1111111')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, '@11111')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, '#1111111')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, 'abcdefg')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, '#abcdefg')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, 'ABCDEFG')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, '#ABCDEFG')).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, [1, 2])).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, {number: 1})).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, null)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
+    expect(Utils.getReverseColor.bind(Utils, undefined)).to.throw('`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
 
     // Expected results
-    expect(Utils.getReverseColor('1')).to.equal('#FFFFFE');
-    expect(Utils.getReverseColor('11111')).to.equal('#FEEEEE');
-    expect(Utils.getReverseColor('#11111')).to.equal('#FEEEEE');
+    expect(Utils.getReverseColor('001')).to.equal('#FFE');
+    expect(Utils.getReverseColor('#abc')).to.equal('#543');
+    expect(Utils.getReverseColor('000001')).to.equal('#FFFFFE');
+    expect(Utils.getReverseColor('011111')).to.equal('#FEEEEE');
+    expect(Utils.getReverseColor('#011111')).to.equal('#FEEEEE');
     expect(Utils.getReverseColor('#abcdef')).to.equal('#543210');
     expect(Utils.getReverseColor('#FEDCBA')).to.equal('#012345');
+    expect(Utils.getReverseColor('aBcDeF')).to.equal('#543210');
+    expect(Utils.getReverseColor('#aBcDeF')).to.equal('#543210');
   });
 
   it('generateNaturalSequence()', () => {

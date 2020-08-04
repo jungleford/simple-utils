@@ -63,13 +63,18 @@ export default {
    * @return {string} the string value of the reverse color. e.g., "00FFFF".
    */
   getReverseColor: color => {
-    assert(_.isString(color) && /^#?([0-9a-f]{1,6}|[0-9A-F]{1,6})$/g.test(color),
-      '`color` must be a positive integer with hex format between #000000 and #FFFFFF.');
+    assert(_.isString(color) && /^#?([0-9a-f]{3}|[0-9a-f]{6})$/gi.test(color),
+      '`color` must be a positive integer with hex format between #000000 and #FFFFFF, or between #000 and #FFF.');
 
-    let value = _.parseInt(color.replace(/#/g, ''), 16);
-    let result = '000000' + (0xFFFFFF - value).toString(16).toUpperCase();
+    color = color.replace(/#/g, '');
+    let prefix = color.length === 3 ? '000' : '000000',
+        max = color.length === 3 ? 0xFFF : 0xFFFFFF;
 
-    return '#' + result.substring(result.length - 6, result.length);
+
+    let value = parseInt(color, 16);
+    let result = prefix + (max - value).toString(16).toUpperCase();
+
+    return '#' + result.substring(result.length - color.length, result.length);
   },
 
   /**
